@@ -1,0 +1,6 @@
+# Emacs buffer files
+*.*~
+
+# Emacs caches
+elpa/
+auto-save-list/
