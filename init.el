@@ -10,44 +10,57 @@
 
 ;;; Define mandatory packages
 (setq package-selected-packages
-      '(aggressive-indent
-	evil
+      '(;; general packages
 	neotree
+	evil
+	auto-complete
+	flycheck
+	aggressive-indent
+	magit
+	powerline
+	autopair
+	markdown-mode
+	web-mode
+	yaml-mode
+	;; themes
+	color-theme
+	solarized-theme
+	material-theme
+	;; python
+	elpy
+	py-autopep8
+	jedi
+	;; clojure
 	cider
 	ac-slime
-	auto-complete
-	autopair
 	clojure-mode
 	clj-refactor
-	elpy
-	flycheck
-	magit
-	markdown-mode
 	paredit
-	powerline
 	rainbow-delimiters
-	smartparens
-	solarized-theme
-	web-mode
-	yaml-mode))
+	smartparens))
+
+;;; Refresh local package list cache
+(unless package-archive-contents
+  (package-refresh-contents))
 
 ;;; Install all needed packages
-(package-refresh-contents)
-(package-install-selected-packages)
+(dolist (pkg package-selected-packages)
+  (unless (package-installed-p pkg)
+    (package-install pkg)))
 
-;;; 'Require' list of mandatory package imports
+;;; Load all installed packages
 (dolist (pkg package-selected-packages)
   (require pkg))
 
-;;; Set the user info correctly
-(setq user-full-name "Andy Mender")
-(setq user-mail-address "andymenderunix@gmail.com")
-
-;;; Extend ENV setup (placeholder for now) and execution path
+;;; General configuration
 (add-to-list 'exec-path "$HOME/bin")
 
-;;; General configuration
-(evil-mode 1)
+(setq user-full-name "Andy Mender"
+      user-mail-address "andymenderunix@gmail.com"
+      inhibit-startup-message t)
+
+(load-theme 'material t)
+(evil-mode t)
 (global-display-line-numbers-mode)
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -59,4 +72,29 @@
 (add-hook 'clojure-mode-hook #'smartparens-strict-mode)   
 (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-(add-hook 'clojure-mode-hoom #'clj-refactor-mode)
+(add-hook 'clojure-mode-hook #'clj-refactor-mode)
+
+;;; Set up Python development environment
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-hook 'python-mode-hook #'elpy-enable)
+(add-hook 'elpy-mode-hook #'py-autopep8-enable-on-save)
+(add-hook 'elpy-mode-hook  #'flycheck-mode)
+(add-hook 'python-mode-hook #'jedi-mode)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" default)))
+ '(package-selected-packages
+   (quote
+    (jedi material-theme aggressive-indent evil neotree cider ac-slime auto-complete autopair clojure-mode clj-refactor elpy flycheck magit markdown-mode paredit powerline rainbow-delimiters smartparens solarized-theme web-mode yaml-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
