@@ -4,3 +4,6 @@
 # Emacs caches
 elpa/
 auto-save-list/
+
+# Python caches
+.python_environments/
