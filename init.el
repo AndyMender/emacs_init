@@ -61,9 +61,13 @@
 
 (load-theme 'material t)
 (evil-mode t)
-(global-display-line-numbers-mode)
+(global-linum-mode t)
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key (kbd "C-x g") 'magit-status)
+
+(require 'auto-complete-config)
+(ac-config-default)
+(global-auto-complete-mode t)
 
 ;;; Set up Clojure development environment
 (add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
