@@ -6,4 +6,4 @@ elpa/
 auto-save-list/
 
 # Python caches
-.python_environments/
+.python-environments/
