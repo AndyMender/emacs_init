@@ -14,12 +14,14 @@
 	neotree
 	evil
 	auto-complete
+	editorconfig
 	flycheck
 	aggressive-indent
 	magit
 	powerline
 	autopair
 	markdown-mode
+	markdown-preview-mode
 	web-mode
 	yaml-mode
 	;; themes
@@ -61,6 +63,7 @@
 
 (load-theme 'material t)
 (evil-mode t)
+(editorconfig-mode t)
 (global-linum-mode t)
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -84,6 +87,8 @@
 (add-hook 'elpy-mode-hook #'py-autopep8-enable-on-save)
 (add-hook 'elpy-mode-hook  #'flycheck-mode)
 (add-hook 'python-mode-hook #'jedi-mode)
+(add-hook 'python-mode-hook #'jedi:setup)
+(setq jedi:complete-on-dot t) ; optional
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -95,7 +100,7 @@
     ("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" default)))
  '(package-selected-packages
    (quote
-    (jedi material-theme aggressive-indent evil neotree cider ac-slime auto-complete autopair clojure-mode clj-refactor elpy flycheck magit markdown-mode paredit powerline rainbow-delimiters smartparens solarized-theme web-mode yaml-mode))))
+    (## jedi material-theme aggressive-indent evil neotree cider ac-slime auto-complete autopair clojure-mode clj-refactor elpy flycheck magit markdown-mode paredit powerline rainbow-delimiters smartparens solarized-theme web-mode yaml-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
