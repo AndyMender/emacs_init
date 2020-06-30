@@ -90,6 +90,11 @@
 (add-hook 'python-mode-hook #'jedi:setup)
 (setq jedi:complete-on-dot t) ; optional
 
+;;; Set up C/C++ development environment (most is enabled by default
+(add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
